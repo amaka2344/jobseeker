@@ -2,12 +2,12 @@ import React from "react";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import UserInfoCard from "../Components/UserInfoCard";
+import Template from "../Components/Template";
 
 function AppliedJob() {
   return (
-    <div>
-      <Header page={"appliedJob"} />
-      <section className="job-bg page ad-profile-page">
+    <Template>
+<section className="job-bg page ad-profile-page">
         <div className="container">
           <div className="breadcrumb-section">
             <ol className="breadcrumb">
@@ -84,8 +84,8 @@ function AppliedJob() {
           </div>
         </div>
       </section>
-      <Footer />
-    </div>
+    </Template>
+    
   );
 }
 

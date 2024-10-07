@@ -1,34 +1,38 @@
-import logo from "./logo.svg";
 import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
+  Route
 } from "react-router-dom";
-import Index from "./Pages/Index.jsx";
-import JobList from "./Pages/JobList.jsx";
-import JobDetails from "./Pages/JobDetails.jsx";
-import Resume from "./Pages/Resume.jsx";
-import Profile from "./Pages/Profile.jsx";
-import PostResume from "./Pages/PostResume";
-import JobPost from "./Pages/JobPost";
-import EditResume from "./Pages/EditResume";
-import ProfileDetails from "./Pages/ProfileDetails";
-import BookMark from "./Pages/BookMark";
-import AppliedJob from "./Pages/AppliedJob";
-import DeleteAccount from "./Pages/DeleteAccount";
-import Signup from "./Pages/Signup";
-import Signin from "./Pages/Signin";
+import Index from "./Screens/Index.jsx";
+import JobList from "./Screens/JobListing.jsx";
+import JobDetails from "./Screens/JobDetails.jsx";
+import Resume from "./Screens/Resume.jsx";
+import Profile from "./Screens/Profile.jsx";
+import PostResume from "./Screens/PostResume";
+import JobPost from "./Screens/JobPost";
+import EditResume from "./Screens/EditResume";
+import ProfileDetails from "./Screens/ProfileDetails";
+import BookMark from "./Screens/BookMarks";
+import AppliedJob from "./Screens/AppliedJobs";
+import DeleteAccount from "./Screens/DeleteAccount";
+import Signup from "./Screens/Signup";
+import Signin from "./Screens/Signin";
+import { jobData } from "./Components/GeneralFunction.jsx";
+import { ReactNotifications } from "react-notifications-component";
+import 'react-notifications-component/dist/theme.css'
+
+
 
 function App() {
   return (
     <div>
+    <ReactNotifications />
       <Router>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/job-list" element={<JobList />} />
-          <Route path="/job-details" element={<JobDetails />} />
+          <Route path="/job-details/:id" element={<JobDetails Jobs={jobData}/>} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/post-resume" element={<PostResume />} />

@@ -1,8 +1,19 @@
 import Header from "./../Components/Header.jsx";
 import Footer from "./../Components/Footer.jsx";
 import UserInfoCard from "../Components/UserInfoCard.jsx";
+import React from "react";
+import cookies from 'js-cookies'
 
 function Profile() {
+
+  const Token = cookies.getItem("token")
+
+  React.useEffect(() => {
+    if(Token === undefined || Token === null || Token === "") {
+      window.location.href="/signin"
+    }
+  })
+
   return (
     <div>
       <Header page="profile" />

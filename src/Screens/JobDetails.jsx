@@ -1,7 +1,28 @@
+import React from "react";
 import Header from "./../Components/Header.jsx";
 import Footer from "./../Components/Footer.jsx";
+import { useParams, useLocation } from "react-router-dom";
+import { jobData, config } from "../Components/GeneralFunction.jsx";
+import axios from "axios";
 
-function JobDetails() {
+function JobDetails({ Jobs }) {
+  const [jobdet, setJobDet] = React.useState([]);
+
+  const { id } = useParams();
+
+  React.useEffect(() => {
+    const foundJob = Jobs.find((job) => job.id === id);
+    setJobDet(foundJob);
+    console.log(foundJob);
+  }, [Jobs, id]);
+
+  const FetchData = () => {
+    let url = "http:/get_url";
+    axios.get(url, config).then((Response) => {
+      setJobDet(Response.data.data);
+    });
+  };
+
   return (
     <div>
       <Header page="Details" />
@@ -78,8 +99,8 @@ function JobDetails() {
                 <div className="item-image-box">
                   <div className="item-image">
                     <img
-                      src="images/job/4.png"
-                      alt="Image"
+                      src={jobdet.image}
+                      alt={jobdet.title}
                       className="img-fluid"
                     />
                   </div>
@@ -88,10 +109,10 @@ function JobDetails() {
                   <span>
                     <span>
                       <a href="#" className="title">
-                        Human Resource Manager
+                        {jobdet.title}
                       </a>
                     </span>{" "}
-                    @ <a href="#"> Dropbox Inc</a>
+                    @ <a href="#"> {jobdet.company}</a>
                   </span>
                   <div className="ad-meta">
                     <ul>
@@ -101,7 +122,7 @@ function JobDetails() {
                             className="fa fa-map-marker"
                             aria-hidden="true"
                           ></i>
-                          San Francisco, CA, US
+                          {jobdet.office}
                         </a>
                       </li>
                       <li>
@@ -112,7 +133,7 @@ function JobDetails() {
                       </li>
                       <li>
                         <i className="fa fa-money" aria-hidden="true"></i>
-                        $25,000 - $35,000
+                        ${jobdet.min_salary} - ${jobdet.max_salary}
                       </li>
                       <li>
                         <a href="#">
@@ -395,7 +416,7 @@ function JobDetails() {
 
       <Footer />
     </div>
-  )
+  );
 }
 
 export default JobDetails;
